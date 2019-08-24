@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Remote and Tivi</title>
+</head>
+<body>
+    <script>
+        function Television(channel){
+            this.status=false;
+            this.channelCurrent=channel;
+            this.volume=20;
+            this.changeChannel=function(channel){
+                if(this.status) {
+                    this.channelCurrent=channel;
+                }
+            };
+            this.changeVolume= function(volume){
+                if(this.status){
+                    this.volume +=volume;
+                }
+
+            };
+            this.turnOnOff=function(){
+                this.status=!this.status;
+            }
+
+        }
+
+        function Remote(chanel){
+            this.channelCode=chanel;
+            this.television=null;
+            this.connectTelevision=function (television) {
+                this.television=television;
+            };
+            this.changeChannel= function (channel) {
+                this.channelCode=channel;
+                this.television.changeChannel(this.channelCode);
+            };
+
+            this.changeVolume=function(volume){
+                this.television.changeVolume(volume);
+            };
+
+            this.turnOnOff=function () {
+                this.television.turnOnOff();
+            }
+
+        }
+
+        ////////////////////////Program////////////
+
+        let television= new Television(2);
+        let remote = new Remote(1);
+        ////
+        remote.connectTelevision(television);
+        ///
+        alert("Trạng thái tivi hiện tại: " + television.status);
+        remote.turnOnOff();
+        alert("Trạng thái tivi hiện tại: " + television.status);
+        alert("Kênh Hiện của tivi hiện tại: " + television.channelCurrent);
+        remote.changeChannel(7);
+        alert("Kênh Hiện của tivi chuyển lần 1: " + television.channelCurrent);
+        remote.changeChannel(3);
+        alert("Kênh Hiện của tivi chuyển lần 2: " + television.channelCurrent);
+        alert("Âm lượng hiện tại: " + television.volume);
+        remote.changeVolume(2);
+        alert("Âm lượng sau khi tăng 2: " + television.volume);
+        remote.turnOnOff();
+        if( !television.status){
+            alert("Tivi đã tăt");
+        }
+
+
+    </script>
+</body>
+</html>
+<!--
+
+Viết một chương trình sử dụng Remote để điều khiển TiVi theo kịch bản như sau:
+
+Khai báo và khởi tạo một chiếc Tivi.
+
+Khai báo và khởi tạo một chiếc Remote.
+
+Bật tivi.
+
+Chuyển đến kênh 7.
+
+Dùng remote chuyển đến kênh 3.
+
+Tăng âm lượng lên 2 đơn vị.
+
+Dùng remote tắt tivi.
+
+Để hoàn thành bài thực hành, học viên cần:
+
+Đưa mã nguồn lên GitHub
+Dán link của repository lên phần nộp bài trên CodeGymX
+Hướng dẫn
+Khai báo các lớp theo trật tự phụ thuộc
+Khởi tạo các đối tượng
+Thực hiện các thao tác theo kịch bản-->
